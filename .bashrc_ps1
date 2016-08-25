@@ -1,0 +1,53 @@
+reset_style='\[\033[00m\]'
+
+status_style=$reset_style'\[\033[2;94m\]' # gray color; use 0;37m for lighter color
+
+prompt_style=$reset_style
+
+command_style=$reset_style'\[\033[1;29m\]' # bold black
+
+# Prompt variable:
+
+# Status Line
+PS1="$status_style"'$fill [\t]\n'
+
+# Upper line, with location, user and computer
+PS1="$PS1"'${debian_chroot:+($debian_chroot)}[\!:\#] \u@\h\n'
+
+# Lower line, only with the current location
+PS1="$PS1""$prompt_style"'\w\$'"$command_style "
+
+# Reset color for command output
+# (this trap assures that if a DEBUG signal is sent, the prompt will reset style):
+
+trap 'echo -ne "\033[00m"' DEBUG
+
+function prompt_command {
+
+# create a $fill of all screen width minus the time string and a space:
+
+let fillsize=${COLUMNS}-11
+
+# Modify here to change the char that will do the fill
+fillchar="="
+fill=""
+
+while [ "$fillsize" -gt "0" ]; do
+	fill="${fillchar}${fill}" # fill with underscores to work on
+	let fillsize=${fillsize}-1
+done
+
+# If this is an xterm set the title to user@host:dir
+
+case "$TERM" in	
+	xterm*|rxvt*)
+		bname=`basename "${PWD/$HOME/~}"`
+		echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+		;;
+	*)
+		;;
+esac
+
+}
+
+PROMPT_COMMAND=prompt_command

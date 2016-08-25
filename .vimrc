@@ -74,7 +74,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 let g:pymode_options_max_line_length = 100
-colorscheme slate 
+colorscheme slate
 
 
 "Remaps
