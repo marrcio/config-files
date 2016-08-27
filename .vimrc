@@ -74,7 +74,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 let g:pymode_options_max_line_length = 100
-colorscheme slate
+"highlight NonText ctermbg=none
+colorscheme synic
 
 
 "Remaps
@@ -82,6 +83,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" Makes a jsonlines file be pretty printed
+nnoremap <F5> :%!python3 -c 'import fileinput, json;[print(json.dumps(json.loads(line), sort_keys=False, indent=4, ensure_ascii=False)) for line in fileinput.input()]'<CR><CR>
 
 set splitbelow
 set splitright
