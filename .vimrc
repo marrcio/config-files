@@ -85,6 +85,8 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " Makes a jsonlines file be pretty printed
 nnoremap <F5> :%!python3 -c 'import fileinput, json;[print(json.dumps(json.loads(line), sort_keys=False, indent=4, ensure_ascii=False)) for line in fileinput.input()]'<CR><CR>
+nnoremap <F3> :set nu!<CR>
+highlight LineNr term=bold cterm=NONE ctermfg=249 ctermbg=240 gui=NONE guifg=DarkGrey guibg=NONE
 
 set splitbelow
 set splitright
